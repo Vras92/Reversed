@@ -1,7 +1,14 @@
+
 public class Main {
     public static void main(String[] args) {
-//        Printer.print(ReverseStr.reverse("abcd efgh"));
-//        Printer.print(ReverseStr.reverse("a1bcd efg!h"));
-        Printer.print(ReverseStr.reverse(InputString.input()));
+        //        String x = InputString.input();
+        String x = "a1bcd efg!h";
+        //String x = "Labas rytas!";
+        Printer.print(x);
+        ReverseStr.nonLetters(x);// collecting all non-letters
+        x = ReverseStr.reverseWords(x);// splitting string and reversing words
+        x = ReverseStr.nonLettersInsert(x);// inserting all non-letters into the same indexes
+        Printer.print(x);
+
     }
 }

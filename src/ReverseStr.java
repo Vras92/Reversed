@@ -1,33 +1,48 @@
+import static java.lang.Character.*;
 
 class ReverseStr {
 
-    public static String reverse(String str) {
-        System.out.println("Your input: " + str);
-        if (str.isEmpty()) return str;
-
-        String result = "";
-        char [] notLetters = new char[str.length()];
-        int [] notLettersIndex = new int[str.length()];
-        int j = 0;
-        //Collecting all letters in reversed order
-        for (int i = str.length() - 1; i >= 0; i--) {
-            if (Character.isLetter(str.charAt(i))) {
-                result += str.charAt(i);
+    static char[] newNotLetters;
+    static int[] newNotLettersIndex;
+    static int j = 0;
+    public static String reverseWords(String str) {
+        String[] words = str.split("\\s");
+        String rWord = "";
+        for (String w : words) {
+            StringBuilder sb = new StringBuilder(w);
+            for (int i = 0; i < sb.length(); i++) {
+                if (!isLetter(sb.charAt(i))) sb.deleteCharAt(i);
             }
+            sb.reverse();
+            rWord += sb.toString();
         }
-        //Collecting all non-letters and their indexes
+        return rWord.trim();
+    }
+
+    public static void nonLetters(String str) {
+        char[] notLetters = new char[str.length()];
+        int[] notLettersIndex = new int[str.length()];
+        j = 0;
         for (int i = 0; i < str.length(); i++) {
-            if (!Character.isLetter(str.charAt(i))) {
+            if (!isLetter(str.charAt(i))) {
                 notLetters[j] = str.charAt(i);
                 notLettersIndex[j] = i;
                 j++;
             }
         }
-        //Placing non-letters in reversed string of input
-        StringBuilder sb = new StringBuilder(result);
-        for (int i = 0; i < notLettersIndex.length; i++) {
-            if (notLetters[i] != '\0') sb.insert(notLettersIndex[i], notLetters[i]);
+        //resize arrays
+        newNotLetters = new char[j];
+        newNotLettersIndex = new int[j];
+        System.arraycopy(notLetters,0,newNotLetters,0,j);
+        System.arraycopy(notLettersIndex,0,newNotLettersIndex,0,j);
+        notLetters =newNotLetters;
+        notLettersIndex =newNotLettersIndex;
+    }
+    public static String nonLettersInsert(String str) {
+        StringBuilder sb2 = new StringBuilder(str);
+        for (int i = 0; i < j; i++) {
+            if (newNotLetters[i] != '\0') sb2.insert(newNotLettersIndex[i], newNotLetters[i]);
         }
-        return "Result: " + sb.toString();
+        return sb2.toString();
     }
 }
