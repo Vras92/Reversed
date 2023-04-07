@@ -1,12 +1,12 @@
 import org.junit.jupiter.api.*;
 
 class ReverseStrTest {
-    String input = "Labas rytas!";
+    String input = "a1bcd efg!h";
     @Test
     @DisplayName("Collect all non-letters")
     void nonLetters() {
-        char[] expectedNotLetters = {' ', '!'};
-        int[] expectedNotLettersIndex = {5, 11};
+        char[] expectedNotLetters = {'1', ' ', '!'};
+        int[] expectedNotLettersIndex = {1, 5, 9};
         ReverseStr.nonLetters(input);
         Assertions.assertArrayEquals(expectedNotLetters, ReverseStr.newNotLetters);
         Assertions.assertArrayEquals(expectedNotLettersIndex, ReverseStr.newNotLettersIndex);
@@ -14,7 +14,7 @@ class ReverseStrTest {
     @Test
     @DisplayName("Split string into words and reverse it. Also removes non-letters")
     void reverseWords() {
-        String expectedOutput = "sabaLsatyr";
+        String expectedOutput = "dcbahgfe";
         String actualOutput = ReverseStr.reverseWords(input);
         Assertions.assertEquals(expectedOutput, actualOutput);
     }
@@ -23,9 +23,9 @@ class ReverseStrTest {
     void nonLettersInsert() {
         ReverseStr.nonLetters(input);
         String x = ReverseStr.reverseWords(input);
-        char[] NewNotLetters = {' ', '!'};
-        int[] NewNotLettersIndex = {5, 11};
-        String expectedOutput = "sabaL satyr!";
+        char[] NewNotLetters = {1, ' ', '!'};
+        int[] NewNotLettersIndex = {1, 5, 9};
+        String expectedOutput = "d1cba hgf!e";
 
         String actualOutput = ReverseStr.nonLettersInsert(x);
         Assertions.assertEquals(expectedOutput, actualOutput);
